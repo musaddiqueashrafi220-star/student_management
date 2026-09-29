@@ -1,0 +1,72 @@
+import requests
+from tkinter import *
+def city_latlong():
+    city=E.get()
+    url = f"https://geocoding-api.open-meteo.com/v1/search?name={city}&count=1&language=en&format=json"
+    data=requests.get(url).json()
+    city=(data['results'][0]['name'])
+    latitude=(data['results'][0]['latitude'])
+    longitude=(data['results'][0]['longitude'])
+
+
+      
+url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current=temperature_2m%2Crelative_humidity_2m%2Cwind_speed_10m&timezone=auto"
+ weather_data = requests.get(url).json()
+(weather_data.keys())
+(weather_data['current'])
+time=(weather_data['current']['time'])
+current_temp=(weather_data['current']['temperature_2m'])
+current_humid=(weather_data['current']['relative_humidity_2m'])
+speed_wind=(weather_data['current']['wind_speed_10m'])
+    
+    L1=Label(root,text=f"City: {city}\nLatitude: {latitude}\nLongitude: {longitude}",font=("Arial",14,"bold"))
+    L1.grid(row=3,column=0)
+    L2=Label(root,text=f"time:",font={"Arial",14,"bold"})
+    L2.grid(row=4,column=0)
+    L3=Label(root,text=f"current_temp:",font={"Arial",14,"bold"})
+    L3.grid(row=5,column=0)
+    L4=Label(root,text=f"current_humid:",font={"Arial",14,"bold"})
+    L4.grid(row=6,column=0)
+    L5=Label(root,text=f"speed_wind:",font={"Arial",14,"bold"})
+    L5.grid(row=7,column=0)
+    
+    # L6=Label(root,text=f"time: {time}",font={"Arial",14,"bold"})
+    # L6.grid(row=8,column=0)
+
+def weather_data():
+    pass
+    # Current Weather
+    url = "https://api.open-meteo.com/v1/forecast"
+    params = {
+	    "latitude": {latitude},
+	    "longitude": {longitude},
+	    "current": ["temperature_2m", "wind_speed_10m", "wind_direction_10m"],
+        "timezone" : "auto"
+    }
+    weather_data=requests.get(url,params=params).josn()
+    print(weather_data.json())
+
+    
+    
+    # url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current=temperature_2m%2Crelative_humidity_2m%2Cwind_speed_10m&timezone=auto"
+    # weather_data = requests.get(url).json()
+    (weather_data.keys())
+    (weather_data['current'])
+    time=(weather_data['current']['time'])
+    current_temp=(weather_data['current']['temperature_2m'])
+    current_humid=(weather_data['current']['relative_humidity_2m'])
+    speed_wind=(weather_data['current']['wind_speed_10m'])
+
+
+root=Tk()
+root.title("City Latitude and Longitude")
+
+L=Label(root,text="Enter City Name:")
+L.grid(row=0,column=0)
+E=Entry(root,font=("Arial",14))
+E.grid(row=1,column=0)
+B=Button(root,text="Get Latitude and Longitude",command=city_latlong,font=("Arial",10,"bold"),bg="green",fg="white")
+B.grid(row=2,column=0)
+B1=Button(root,text="Get your city weather data",command=weather_data,font=("Arial",10,"bold"),bg="green",fg="white")
+B1.grid(row=4,column=0,columnspan=2)
+root.mainloop()
