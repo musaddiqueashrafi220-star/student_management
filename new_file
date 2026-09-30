@@ -1,0 +1,65 @@
+import requests  
+from tkinter import *
+
+# city1
+url = f"https://geocoding-api.open-meteo.com/v1/search?name=malegaon&count=1&language=en&format=json"
+data=requests.get(url).json
+city_1=data['results'][0]['name']
+lati_1=data['results'][0]['latitude']
+long_1=data['results'][0]['longitude']
+
+
+# city2
+url = f"https://geocoding-api.open-meteo.com/v1/search?name=nashik&count=1&language=en&format=json"
+data=requests.get(url).json
+city_2=data['results'][0]['name']
+lati_2=data['results'][0]['latitude']
+long_2=data['results'][0]['longitude']
+
+
+# city3
+url = f"https://geocoding-api.open-meteo.com/v1/search?name=mumbai&count=1&language=en&format=json"
+data=requests.get(url).json
+city_3=data['results'][0]['name']
+lati_3=data['results'][0]['latitude']
+long_3=data['results'][0]['longitude']
+
+
+# city4
+url = f"https://geocoding-api.open-meteo.com/v1/search?name=lucknow&count=1&language=en&format=json"
+data=requests.get(url).json
+city_4=data['results'][0]['name']
+lati_4=data['results'][0]['latitude']
+long_4=data['results'][0]['longitude']
+
+
+# city5
+url = f"https://geocoding-api.open-meteo.com/v1/search?name=dehli&count=1&language=en&format=json"
+data=requests.get(url).json
+city_5=data['results'][0]['name']
+lati_5=data['results'][0]['latitude']
+long_5=data['results'][0]['longitude']
+
+root=Tk()
+root.title("live weather data")
+
+L1=Label(root,text=f"City: {city_1}\nLatitude: {lati_1}\nLongitude: {long_1}",font=("Arial",14,"bold"))
+L1.grid(row=1,column=0,padx=10,pady=10)
+
+L1=Label(root,text=f"City: {city_1}\nLatitude: {lati_1}\nLongitude: {long_1}",font=("Arial",14,"bold"))
+L1.grid(row=1,column=0,padx=10,pady=10)
+
+L2=Label(root,text=f"City: {city_2}\nLatitude: {lati_2}\nLongitude: {long_2}",font=("Arial",14,"bold"))
+L2.grid(row=2,column=0,padx=10,pady=10)
+
+L3=Label(root,text=f"City: {city_3}\nLatitude: {lati_3}\nLongitude: {long_3}",font=("Arial",14,"bold"))
+L3.grid(row=3,column=0,padx=10,pady=10)
+
+L4=Label(root,text=f"City: {city_4}\nLatitude: {lati_4}\nLongitude: {long_4}",font=("Arial",14,"bold"))
+L4.grid(row=4,column=0,padx=10,pady=10)
+
+L5=Label(root,text=f"City: {city_5}\nLatitude: {lati_5}\nLongitude: {long_5}",font=("Arial",14,"bold"))
+L5.grid(row=5,column=0,padx=10,pady=10)
+
+
+root.mainloop()
